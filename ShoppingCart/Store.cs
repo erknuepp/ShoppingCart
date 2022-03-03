@@ -5,7 +5,7 @@
 
     public class Store
     {
-        private readonly ICollection<Item> _items;
+        private readonly IList<Item> _items;
         public Store()
         {
             _items = new List<Item>
@@ -30,7 +30,7 @@
             return selection;
         }
 
-        public Store(ICollection<Item> items)
+        public Store(IList<Item> items)
         {
             _items = items;
         }
@@ -50,6 +50,11 @@
             {
                 Console.WriteLine($" ({i++}) {item.Name} {item.Price:C2}");
             }
+        }
+
+        public Item GetItem(int selection)
+        {
+            return _items[selection-1];
         }
     }
 }
