@@ -17,6 +17,19 @@
             };
         }
 
+        internal static int GetQuantity()
+        {
+            Console.WriteLine("\nPlease enter a quantity");
+            int quantity;
+            var input = Console.ReadLine();
+            while (!int.TryParse(input, out quantity) || quantity <= 0 || quantity > 999)
+            {
+                Console.WriteLine("Opps! Please try again");
+                input = Console.ReadLine();
+            }
+            return quantity;
+        }
+
         internal static int GetSelection(int max)
         {
             Console.WriteLine("\nPlease select an item");
