@@ -10,10 +10,10 @@
         [TestMethod]
         public void Item_ToString_Test()
         {
-            const string expectedResult = "test $1.23 999\n";
+            const string expectedResult = "test $1.23\n";
 
             //arrange
-            var item = new Item("test", 1.23m, 999);
+            var item = new Item("test", 1.23m);
 
             //act
             var actualResult = item.ToString();

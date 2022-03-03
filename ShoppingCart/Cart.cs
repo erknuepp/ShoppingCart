@@ -5,13 +5,13 @@
 
     public class Cart
     {
-        ICollection<Item> items;
+        ICollection<CartItem> items;
         public Cart()
         {
-            items = new List<Item>();
+            items = new List<CartItem>();
         }
 
-        public void AddItem(Item item)
+        public void AddItem(CartItem item)
         {
             items.Add(item);
         }
@@ -19,7 +19,7 @@
         public int ItemsCount => items.Count;
 
 
-        public bool RemoveItem(Item item)
+        public bool RemoveItem(CartItem item)
         {
             if (items.Remove(item))
             {
@@ -37,7 +37,7 @@
         {
             decimal subtotal = 0.0m;
 
-            foreach (Item item in items)
+            foreach (CartItem item in items)
             {
                 subtotal += item.Price * item.Quantity;
             }
@@ -58,7 +58,7 @@
         public string Checkout(decimal subtotal, decimal tax, decimal total)
         {
             var result = "";
-            foreach (Item item in items)
+            foreach (CartItem item in items)
             {
                 result += item.ToString();
             }

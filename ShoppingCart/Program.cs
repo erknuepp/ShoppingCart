@@ -9,8 +9,9 @@
         static void Main(string[] args)
         {
             var cart = new Cart();
-            var item = new Item("Item1", 1.99m, 99);
-            cart.AddItem(item);
+            var item = new Item("Item1", 1.99m);
+            var cartItem = new CartItem(item, 99);
+            cart.AddItem(cartItem);
             var subtotal = cart.CalculateSubtotal();
             var tax = Cart.CalculateTax(subtotal, TaxRate);
             var total = Cart.CalculateTotal(subtotal, tax);

@@ -19,9 +19,11 @@
 
             //arrange
             Cart cart = new Cart();
+            Item item = new Item("test", 1.23m);
+            CartItem cartItem = new CartItem(item, 999);
 
             //act
-            cart.AddItem(new Item("test", 1.23m, 999));
+            cart.AddItem(cartItem);
             var actualCount = cart.ItemsCount;
 
             //assert
@@ -34,12 +36,13 @@
             const int expectedCount = 0;
 
             //arrange
-            Cart cart = new Cart();            
-            var item = new Item("test", 1.23m, 999);
-            cart.AddItem(item);
+            Cart cart = new Cart();
+            Item item = new Item("test", 1.23m);
+            CartItem cartItem = new CartItem(item, 999);
+            cart.AddItem(cartItem);
 
             //act
-            cart.RemoveItem(item);
+            cart.RemoveItem(cartItem);
             var actualCount = cart.ItemsCount;
 
             //assert
@@ -53,8 +56,9 @@
 
             //arrange
             Cart cart = new Cart();
-            var item = new Item("test", 1.23m, 999);
-            cart.AddItem(item);
+            Item item = new Item("test", 1.23m);
+            CartItem cartItem = new CartItem(item, 999);
+            cart.AddItem(cartItem);
 
             //act
             cart.RemoveAllItems();
@@ -67,17 +71,18 @@
         [TestMethod]
         public void Cart_Checkout_Test()
         {
-            const decimal TaxRate = 0.07m;            
+            const decimal TaxRate = 0.07m;
 
             //arrange
             Cart cart = new Cart();
-            var item = new Item("test", 1.23m, 999);
-            cart.AddItem(item);
+            Item item = new Item("test", 1.23m);
+            CartItem cartItem = new CartItem(item, 999);
+            cart.AddItem(cartItem);
             var subtotal = cart.CalculateSubtotal();
             var tax = Cart.CalculateTax(subtotal, TaxRate);
             var total = Cart.CalculateTotal(subtotal, tax);
 
-            string expectedResult = $"{item}Subtotal {subtotal:C2}\nTax {tax:C2}\nTotal {total:C2}";
+            string expectedResult = $"Item {item} Quantity {cartItem.Quantity} Subtotal {subtotal:C2}\nTax {tax:C2}\nTotal {total:C2}";
 
             //act
             
