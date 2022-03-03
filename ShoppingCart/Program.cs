@@ -8,6 +8,12 @@
 
         static void Main(string[] args)
         {
+            Store.DisplayWelcomeMessage();
+            var store = new Store();
+            store.DisplayItems();
+
+            int selection = Store.GetSelection(store.ItemsCount);
+
             var cart = new Cart();
             var item = new Item("Item1", 1.99m);
             var cartItem = new CartItem(item, 99);

@@ -2,20 +2,54 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class Store
     {
-        ICollection<Item> items;
+        private readonly ICollection<Item> _items;
         public Store()
         {
-            items = new List<Item>();
-            items.Add(new Item("Bat", 9.79m));
-            items.Add(new Item("Glove", 7.57m));
-            items.Add(new Item("Cap", 5.35m));
-            items.Add(new Item("Ball", 3.13m));
+            _items = new List<Item>
+            {
+                new Item("Bat", 9.79m),
+                new Item("Glove", 7.57m),
+                new Item("Cap", 5.35m),
+                new Item("Ball", 3.13m)
+            };
+        }
+
+        internal static int GetSelection(int max)
+        {
+            Console.WriteLine("\nPlease select an item");
+            int selection;
+            var input = Console.ReadLine();
+            while (!int.TryParse(input, out selection) || selection <= 0 || selection > max)
+            {
+                Console.WriteLine("Opps! Please try again");
+                input = Console.ReadLine();
+            }
+            return selection;
+        }
+
+        public Store(ICollection<Item> items)
+        {
+            _items = items;
+        }
+
+        public int ItemsCount => _items.Count;
+        public static void DisplayWelcomeMessage()
+        {
+            Console.WriteLine("Welcome to Alexander's Baseball Imporium");
+        }
+
+        public void DisplayItems()
+        {
+            Console.WriteLine($"Item Price");
+            Console.WriteLine($"---- -----");
+            int i = 1;
+            foreach (var item in _items)
+            {
+                Console.WriteLine($" ({i++}) {item.Name} {item.Price:C2}");
+            }
         }
     }
 }
